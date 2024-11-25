@@ -30,3 +30,4 @@ echo "Configuración de la tapa del portátil actualizada. Ahora no hará nada a
 sudo usermod -aG docker $(logname)
 newgrp docker
 echo "Usuario agregado al grupo de docker"
+exit
