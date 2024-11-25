@@ -28,6 +28,6 @@ sudo systemctl restart systemd-logind
 echo "Configuración de la tapa del portátil actualizada. Ahora no hará nada al cerrarse."
 
 sudo usermod -aG docker $(logname)
-sudo systemctl restart docker
+newgrp docker
 
 echo "Usuario agregado al grupo de docker"
