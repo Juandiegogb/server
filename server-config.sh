@@ -31,3 +31,4 @@ sudo usermod -aG docker $(logname)
 newgrp docker
 echo "Usuario agregado al grupo de docker"
 exit
+exit
