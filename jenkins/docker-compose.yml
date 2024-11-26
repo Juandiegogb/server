@@ -1,8 +1,0 @@
-services:
-    jenkins:
-        container_name: jenkins
-        ports:
-            - 8080:8080
-            - 50000:50000
-        restart: on-failure
-        image: jenkins/jenkins:lts-jdk17
