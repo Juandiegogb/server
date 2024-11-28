@@ -14,19 +14,6 @@ services:
     environment:
       - CUPS_ADMIN_USERNAME=admin # Usuario administrador
       - CUPS_ADMIN_PASSWORD=admin # Contraseña administrador
-      
-  jenkins:
-        volumes:
-            - jenkins_home:/var/jenkins_home
-        ports:
-            - 8080:8080
-            - 50000:50000
-        restart: on-failure
-        image: jenkins/jenkins:lts-jdk17
-volumes:
-    jenkins_home:
-        external: true
-        name: jenkins_home
 
   pihole:
     container_name: pihole
@@ -55,3 +42,16 @@ volumes:
       - SUBDOMAINS=alansoft
       - TOKEN=279fab86-7fc4-4826-8386-67b185084618
     restart: unless-stopped
+  
+  jenkins:
+        volumes:
+            - jenkins_home:/var/jenkins_home
+        ports:
+            - 8080:8080
+            - 50000:50000
+        restart: on-failure
+        image: jenkins/jenkins:lts-jdk17
+volumes:
+    jenkins_home:
+        external: true
+        name: jenkins_home
