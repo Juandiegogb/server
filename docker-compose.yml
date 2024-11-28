@@ -40,3 +40,13 @@ services:
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
+
+
+  duckdns:
+    image: linuxserver/duckdns
+    container_name: duckdns
+    environment:
+      - TZ=America/Bogota
+      - SUBDOMAINS=as-server.duckdns.org
+      - TOKEN=279fab86-7fc4-4826-8386-67b185084618
+    restart: unless-stopped
