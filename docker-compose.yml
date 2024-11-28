@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   cups:
     image: olbat/cupsd:latest
@@ -18,21 +17,17 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-
     network_mode: "host"
     environment:
       TZ: 'America/Chicago'
       WEBPASSWORD: 'assolutions'
       DNSMASQ_LISTENING: "all"
-
     volumes:
       - ./etc-pihole:/etc/pihole
       - ./etc-dnsmasq.d:/etc/dnsmasq.d
-
     cap_add:
       - NET_ADMIN
     restart: unless-stopped
-
 
   duckdns:
     image: linuxserver/duckdns
@@ -40,18 +35,19 @@ services:
     environment:
       - TZ=America/Bogota
       - SUBDOMAINS=alansoft
-      - TOKEN=279fab86-7fc4-4826-8386-67b185084618
+      - TOKEN=${DUCKDNS_TOKEN} # Leer TOKEN desde el archivo .env
     restart: unless-stopped
-  
+
   jenkins:
-        volumes:
-            - jenkins_home:/var/jenkins_home
-        ports:
-            - 8080:8080
-            - 50000:50000
-        restart: on-failure
-        image: jenkins/jenkins:lts-jdk17
+    container_name: jenkins
+    image: jenkins/jenkins:lts-jdk17
+    ports:
+      - 8080:8080
+      - 50000:50000
+    restart: on-failure
+    volumes:
+      - jenkins_home:/var/jenkins_home
+
 volumes:
-    jenkins_home:
-        external: true
-        name: jenkins_home
+  jenkins_home:
+    # Si no es necesario usar un volumen externo, elimina esta configuración
