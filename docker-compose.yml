@@ -22,7 +22,8 @@ services:
       - 50000:50000
     restart: on-failure
     image: jenkins/jenkins:lts-jdk17
-    volumes: jenkins_home:/var/jenkins_home
+    volumes:
+      - jenkins_home:/var/jenkins_home
 
   pihole:
     container_name: pihole
