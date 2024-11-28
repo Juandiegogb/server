@@ -16,15 +16,17 @@ services:
       - CUPS_ADMIN_PASSWORD=admin # Contraseña administrador
       
   jenkins:
-    container_name: jenkins
-    ports:
-      - 8080:8080
-      - 50000:50000
-    restart: on-failure
-    image: jenkins/jenkins:lts-jdk17
-    volumes:
-      - jenkins_home:/var/jenkins_home
-    privileged: true
+        volumes:
+            - jenkins_home:/var/jenkins_home
+        ports:
+            - 8080:8080
+            - 50000:50000
+        restart: on-failure
+        image: jenkins/jenkins:lts-jdk17
+volumes:
+    jenkins_home:
+        external: true
+        name: jenkins_home
 
   pihole:
     container_name: pihole
