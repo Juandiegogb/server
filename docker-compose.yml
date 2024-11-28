@@ -22,6 +22,7 @@ services:
       - 50000:50000
     restart: on-failure
     image: jenkins/jenkins:lts-jdk17
+    Volumes: jenkins_home:/var/jenkins_home
 
   pihole:
     container_name: pihole
@@ -34,8 +35,8 @@ services:
       DNSMASQ_LISTENING: "all"
 
     volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+      - ./etc-pihole:/etc/pihole
+      - ./etc-dnsmasq.d:/etc/dnsmasq.d
 
     cap_add:
       - NET_ADMIN
