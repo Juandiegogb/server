@@ -23,7 +23,7 @@ services:
     restart: on-failure
     image: jenkins/jenkins:lts-jdk17
     volumes:
-      - ./jenkins_home:/var/jenkins_home
+      - jenkins_home:/var/jenkins_home
     privileged: true
 
   pihole:
