@@ -1,53 +1,11 @@
 services:
-  cups:
-    image: olbat/cupsd:latest
-    container_name: cups_server
-    restart: always
-    ports:
-      - "631:631" # Puerto estándar para el servicio CUPS
-    volumes:
-      - ./cups-data:/etc/cups # Persistencia de la configuración de CUPS
-      - ./printers:/var/spool/cups # Persistencia de las colas de impresión
-      - ./logs:/var/log/cups # Logs de CUPS
-      - /dev/usb:/dev/usb # Acceso a impresoras USB
-    environment:
-      - CUPS_ADMIN_USERNAME=admin # Usuario administrador
-      - CUPS_ADMIN_PASSWORD=admin # Contraseña administrador
-
-  pihole:
-    container_name: pihole
-    image: pihole/pihole:latest
-    network_mode: "host"
-    environment:
-      TZ: 'America/Chicago'
-      WEBPASSWORD: 'assolutions'
-      DNSMASQ_LISTENING: "all"
-    volumes:
-      - ./etc-pihole:/etc/pihole
-      - ./etc-dnsmasq.d:/etc/dnsmasq.d
-    cap_add:
-      - NET_ADMIN
-    restart: unless-stopped
-
   duckdns:
     image: linuxserver/duckdns
     container_name: duckdns
     environment:
       - TZ=America/Bogota
       - SUBDOMAINS=alansoft
-      - TOKEN=${DUCKDNS_TOKEN} # Leer TOKEN desde el archivo .env
+      - TOKEN=279fab86-7fc4-4826-8386-67b185084618
     restart: unless-stopped
 
-  jenkins:
-    container_name: jenkins
-    image: jenkins/jenkins:lts-jdk17
-    ports:
-      - 8080:8080
-      - 50000:50000
-    restart: on-failure
-    volumes:
-      - jenkins_home:/var/jenkins_home
-
-volumes:
-  jenkins_home:
-    # Si no es necesario usar un volumen externo, elimina esta configuración
+  
